@@ -1,0 +1,53 @@
+{% extends 'AdminMaster.html' %}
+{% load static %}
+
+{% block title %}
+Manage Guard
+{% endblock %}
+
+{% block DashContent %}
+{% if request.session.adminId is None%}
+<script>
+alert('You have to login first')
+window.location.href="/host/studentLogin"
+</script>
+{% endif %}
+<div class="fs-2 text-center my-5">Manage <b style="color:#672d53;">Guard</b></div>
+
+<div class="container-fluid table-responsive">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Guard ID</th>
+      <th scope="col">Picture</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Email</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for x in data %}
+    <tr>
+      <td>{{x.guardid}}</td>
+      <td><img src="/{{x.pic}}" style="max-height:60px" class="img-thumbnail"/></td>
+      <td>{{x.name}}</td>
+      <td>{{x.address}}</td>
+      <td>{{x.mob}}</td>
+      <td>{{x.email}}</td>
+        <td>
+          <a href="/host/manageguard?msg={{x.guardid}}">
+          <span class="fa fa-trash text-danger"></span>
+            </a>
+        </td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+</div>
+
+
+{% endblock %}
+

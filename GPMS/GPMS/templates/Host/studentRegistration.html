@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Student Registration
+    </title>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" >
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" >
+    <script src="https://kit.fontawesome.com/825712df09.js" crossorigin="anonymous"></script>
+<style>
+    *
+    {
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    .container-fluid
+    {
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background-image:url("{% static 'images/gradient-1722840_1280.jpg' %}");
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+
+    .stRegisterOuter
+{
+    min-height:80vh;
+    background:white;
+
+}
+.dashContent
+{
+    display:flex;
+    justify-content:center;
+    padding-top:110px;
+    padding-bottom:110px;
+}
+.stRegisterOuter .guardpic
+{
+    height:100%;
+    width:100%;
+}
+.stRegisterOuter  h4
+{
+text-align:center;
+}
+
+.stRegisterForm input
+{
+    padding-left:40px;
+}
+.stRegisterForm input[Type=submit]
+{
+    background:#642b4f;
+    color:white;
+    padding:5px 0px 5px 0px;
+    font-weight:bold;
+}
+.stRegisterForm input[Type=submit]:hover
+{
+    background:#ffe417;
+    color:black;
+    border:1px solid #682d52;
+}
+.stRegisterForm i
+{
+    position:absolute;
+    padding:9px 8px;
+    font-size:20px;
+    color:grey;
+}
+.defines
+{
+    font-size:10px;
+}
+.imgdiv
+{
+    height:55px;
+    background:red;
+}
+
+.form-control:focus
+{
+    box-shadow:none;
+    border:2px solid #682d53;
+    box-shadow:0 0 5px #682d53;
+}
+</style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row m-3">
+ <div class="col-sm-1"></div>
+    <div class="col-sm-10 stRegisterOuter">
+        <div class="row ">
+    <div class="col-sm-4 pt-2 GuardPic">
+        <img src="{% static 'images/student2.jpg' %}" class="guardpic">
+    </div>
+    <!-- ************** Student Registration Form Start ************** -->
+    <div class="col-sm-8 stRegisterForm py-4 px-4">
+        <h4 >Student <span style="border-bottom:2px solid #682d53;"> Registration</span> Form</h4>
+        <form method="post" class="pt-5" enctype="multipart/form-data">
+        {% csrf_token %} <!--cross site reforgery-->
+            <div class="row g-3">
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa fa-user"></i>
+                    <input type="text" class="form-control" name="name" required placeholder="Enter Full Name *" >
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-id-badge"></i>
+                    <input type="text" class="form-control" name="rid" required placeholder="Enter RegistrationID *">
+                      <span class="defines">UserID can contain any letter or numbers, without spaces</span>
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-key"></i>
+                    <input type="password" class="form-control" name="passwd" required placeholder="Create Password *" >
+                      <span class="defines">Password should be atleast 8 characters</span>
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-key"></i>
+                    <input type="password" class="form-control" name="cpasswd" required placeholder="Confirm Password *">
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+
+                    <select class="form-control" name="course">
+                        <option>Select Course</option>
+                        <option>BCA</option>
+                        <option>Bcom</option>
+                        <option>Bsc</option>
+                    </select>
+                  </div>
+                <div class="col-sm-6 inputOuter">
+                    <select class="form-control" name="ryear">
+                        <option>Select Year</option>
+                        <option>I</option>
+                        <option>II</option>
+                        <option>III</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-envelope"></i>
+                    <input type="email" class="form-control" name="email" required placeholder="Enter Your Email *">
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-phone"></i>
+                    <input type="tel" class="form-control" name="contact" required placeholder="Enter Your Contact *">
+                  </div>
+
+
+                  <div class="col-sm-6 inputOuter">
+                    <input type="file" class="form-control py-2 ps-3" name="pic" accept="image/*">
+                      <span class="defines">Upload Your picture</span>
+                  </div>
+
+                  <div class="col-sm-6 inputOuter">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" class="form-control" required name="address" placeholder="Enter Your Address *">
+                  </div>
+
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 pt-3">
+                    <input type="submit" class="form-control"  value="Save">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </form>
+    </div>
+            <!-- ************** Student Registration Form End ************** -->
+        </div></div>
+     <div class="col-sm-1"></div>
+</div>
+</div>
+</body>
+</html>

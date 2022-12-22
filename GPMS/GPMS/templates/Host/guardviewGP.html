@@ -1,0 +1,48 @@
+{% extends 'GuardMaster.html' %}
+{% load static %}
+
+{% block title %}
+View_GP
+{% endblock %}
+
+{% block DashContent %}
+{% if request.session.GuardId is None%}
+<script>
+alert('You have to login first')
+window.location.href="/host/studentLogin"
+</script>
+{% endif %}
+
+<div class="fs-2 text-center mb-5">Recent <b style="color:#672d53;">GatePass</b></div>
+
+<div class="container-fluid">
+    <table class="table table-hover" style="font-size:15px; text-align:center;">
+  <thead>
+    <tr>
+      <th scope="col">ReqId</th>
+      <th scope="col">Name</th>
+      <th scope="col">Registration Id</th>
+      <th scope="col">From Date</th>
+      <th scope="col">From Time</th>
+      <th scope="col">To Date</th>
+      <th scope="col">To Time</th>
+      <th scope="col">Permission Time</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+      {% for x in data %}
+      <th scope="row">{{x.0}}</th>
+      <td>{{x.2}}</td>
+      <td>{{x.1}}</td>
+      <td>{{x.4}}</td>
+      <td>{{x.5}}</td>
+      <td>{{x.6}}</td>
+      <td>{{x.7}}</td>
+      <td>{{x.8}}</td>
+    </tr>
+      {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

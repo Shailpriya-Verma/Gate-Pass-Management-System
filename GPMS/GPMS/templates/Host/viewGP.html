@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+View_GP
+{% endblock %}
+
+{% block DashContent %}
+{% if request.session.userid is None%}
+<script>
+alert('You have to login first')
+window.location.href="/host/studentLogin"
+</script>
+{% endif %}
+
+<div class="fs-2 text-center my-5">Recent <b style="color:#672d53;">GatePass</b></div>
+
+<div class="container-fluid table-responsive">
+    <table class="table table-hover  " style="font-size:15px; text-align:center;">
+  <thead>
+    <tr>
+      <th scope="col">ReqId</th>
+      <th scope="col">From Date</th>
+      <th scope="col">From Time</th>
+      <th scope="col">To Date</th>
+      <th scope="col">To Time</th>
+      <th scope="col">Reason</th>
+      <th scope="col">Request Time</th>
+      <th scope="col">Status</th>
+      <th scope="col">Permission</th>
+      <th scope="col">Permission Remark</th>
+      <th scope="col">Gate Pass</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for x in data %}
+  <tr>
+      <th scope="row">{{x.id}}</th>
+      <td>{{x.fromdate}}</td>
+      <td>{{x.fromtime}}</td>
+      <td>{{x.todate}}</td>
+      <td>{{x.totime}}</td>
+      <td>{{x.reason}}</td>
+      <td>{{x.reqtime}}</td>
+      {% if x.status == True %}
+      <td><a href="/host/viewGP?status=False&id={{x.id}}"><button class="btn btn-danger">Deactive</button></a></td>
+      {%  else %}
+      <td><label class="text-danger">Deactivated</label></td>
+      {% endif %}
+      <td><a href="#" class="btn btn-info">{{x.permitstatus}}</a></td>
+      <td>{{x.adminremark}}</td>
+
+      {%  if x.permitstatus == 'Allow' %}
+        <td><a href="/host/gatepass/?reqid={{x.id}}" class="btn btn-secondary">View</a></td>
+      {% endif %}
+
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+</div>
+{% endblock %}

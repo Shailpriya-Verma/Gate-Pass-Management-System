@@ -1,0 +1,54 @@
+{% extends 'AdminMaster.html' %}
+{% load static %}
+
+{% block title %}
+Manage_GP
+{% endblock %}
+
+{% block DashContent %}
+{% if request.session.adminId is None%}
+<script>
+alert('You have to login first')
+window.location.href="/host/studentLogin"
+</script>
+{% endif %}
+
+<div class="fs-2 text-center my-5">Manage <b style="color:#672d53;">GatePass</b></div>
+
+<div class="container-fluid table-responsive">
+    <table class="table table-hover" style="font-size:15px; text-align:center;">
+  <thead>
+    <tr>
+
+      <th scope="col">ReqID</th>
+      <th scope="col">Reg Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Picture</th>
+      <th scope="col">From Date / Time</th>
+
+      <th scope="col">To Date / Time</th>
+
+      <th scope="col">Permission</th>
+      <th scope="col">View</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for x in data %}
+  <tr>
+      <th scope="row">{{x.0}}</th>
+      <td>{{x.1}}</td>
+      <td>{{x.2}}</td>
+      <td><img src="/{{x.3}}" width="40px" height="40px"></td>
+      <td>{{x.4}} / {{x.5}}</td>
+      <td>{{x.6}} / {{x.7}}</td>
+      <td>
+          <a href="/host/manageGP/?s=Allow&reqid={{x.0}}"><button type="button" class="btn btn-success">Allow</button></a>
+          <a href="/host/manageGP/?s=Deny&reqid={{x.0}}"><button type="button" class="btn btn-danger">Deny</button></a>
+      <td><a href="/host/viewdetails/?reqid={{x.0}}"><button type="button" class="btn btn-secondary">View Details</button></a></td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+</div>
+{% endblock %}

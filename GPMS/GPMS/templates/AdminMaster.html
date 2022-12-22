@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %} "></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/825712df09.js" crossorigin="anonymous"></script>
+<!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+<style>
+
+#sidebar-wrapper
+{
+box-shadow:0 10px 30px -12px rgb(0 0 0 / 42%), 0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:grey;
+   border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb:hover {
+  background:#672e52;
+   border-radius: 10px;
+}
+
+.logo
+{
+    width:200px;
+    height:60px;
+}
+.navbar a
+{
+    font-size:17px;
+    color:black;
+}
+
+.navbar i
+{
+   color:black;
+   font-size:20px;
+}
+.navbar a:hover
+{
+    background:#fee417;
+}
+
+<!-- top bar css start -->
+.toggle
+{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+#sidebarToggle
+{
+    cursor:pointer;
+    font-size:27px;
+}
+.text
+{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.text i
+{
+    font-size:20px;
+}
+.photo
+{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.photodropdown:hover
+{
+    background:#662d52;
+    color:white;
+}
+.navOuter
+{
+    height:90px;
+    width:100%;
+    border-bottom:1px solid #dee2e6;
+    display:grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-areas:
+    'toggle  text  photo'
+    ;
+}
+
+@media (max-width: 400px)
+{
+  .navOuter
+  {
+    grid-template-columns: 20% 60% 20%;
+    grid-template-areas:
+    'toggle  text  photo';
+  }
+  #sidebarToggle
+  {
+    font-size:20px;
+  }
+  .text i
+  {
+    font-size:10px;
+    text-align:center;
+  }
+  .photo img
+  {
+    width:80px;
+    height:60px;
+  }
+}
+@media (max-width: 992px)
+{
+  .navOuter
+  {
+    grid-template-columns: 20% 60% 20%;
+    grid-template-areas:
+    'toggle  text  photo';
+  }
+  #sidebarToggle
+  {
+    font-size:20px;
+  }
+  .text i
+  {
+    font-size:15px;
+  }
+  .photo img
+  {
+    width:100px;
+    height:80px;
+  }
+}
+<!-- top bar css end -->
+
+</style>
+
+</head>
+
+<body>
+
+
+       <div class="d-flex bg-light" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                <div class="sidebar-heading border-bottom ">
+                    <img src="{% static 'images/sunlogonew.png' %}" class="logo">
+                </div>
+                <div class="list-group list-group-flush mt-5 navbar">
+
+                        <a class="list-group-item list-group-item-action  p-3" href="/host/adminDashboard">
+                        <i class="fa-solid fa-house pe-2"></i> Dashboard</a>
+
+                    <a class="list-group-item list-group-item-action  p-3" href="/host/addGuard/">
+                        <i class="fa-solid fa-person-military-pointing  pe-2"></i> Add Guard</a>
+                    <a class="list-group-item list-group-item-action  p-3" href="/host/managestudent/">
+                        <i class="fa-solid fa-graduation-cap  pe-2"></i> Manage Student</a>
+                    <a class="list-group-item list-group-item-action  p-3" href="/host/manageguard/">
+                        <i class="fa-solid fa-person-military-pointing  pe-2"></i> Manage Guard</a>
+                    <a class="list-group-item list-group-item-action  p-3" href="/host/manageGP/">
+                        <i class="fa-solid fa-ticket pe-2"></i> Approve GatePass</a>
+                    <a class="list-group-item list-group-item-action  p-3" href="/host/Areports/">
+                        <i class="fa-solid fa-file pe-3"></i>  Reports</a>
+                    <a class="list-group-item list-group-item-action  p-3" href="/host/Achangepassword/">
+                        <i class="fa-solid fa-key pe-2"></i> Change Password</a>
+                    <a class="list-group-item list-group-item-action  p-3" href="/host/adminlogout/">
+                        <i class="fa-solid fa-right-from-bracket pe-2"></i> Logout</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <div class="navOuter bg-light">
+                    <div class="toggle" style="display:flex; justify-content:center; align-items:center;">
+                        <!-- Toggle-->
+                            <i class="fa-solid fa-bars" id="sidebarToggle"></i>
+                      <!-- Toggle-->
+                    </div>
+                    <div class="text">
+                        <i>Welcome To Dashboard ADMIN ({{request.session.adminId}})</i>
+
+                    </div>
+                    <div class="photo">
+                        <img src="/{{request.session.pic}}" height="90px" width="110px" style="border-radius:50%" class="nav-link dropdown-toggle img-responsive" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"/>
+
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                        <a class="dropdown-item photodropdown" href="/host/Achangepassword/">Change Password</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item photodropdown" href="/host/adminlogout/">Logout</a>
+                                    </div>
+                    </div>
+                </div>
+                <!-- Page content-->
+                <div class="container-fluid">
+                    {% block DashContent %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+  <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+         <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

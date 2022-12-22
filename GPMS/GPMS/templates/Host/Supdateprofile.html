@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Update_Profile
+{% endblock %}
+<!-- ************** Menu Items Start ************** -->
+{% block DashContent %}
+{% if request.session.userid is None %}
+<script>
+    alert('You have to login first...');
+    window.location.href="/host/studentLogin/"
+
+</script>
+{% endif %}
+
+<style>
+    *
+    {
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    .stRegisterOuter
+{
+    min-height:80vh;
+    background:white;
+
+}
+.dashContent
+{
+    display:flex;
+    justify-content:center;
+    padding-top:110px;
+    padding-bottom:110px;
+}
+.stRegisterOuter  h4
+{
+text-align:center;
+}
+.stRegisterForm
+{
+    box-shadow:-5px 5px 15px 3px grey;
+}
+.stRegisterForm input
+{
+    padding-left:40px;
+}
+.stRegisterForm input[Type=submit]
+{
+    background:#642b4f;
+    color:white;
+    padding:5px 0px 5px 0px;
+    font-weight:bold;
+}
+.stRegisterForm input[Type=submit]:hover
+{
+    background:#ffe417;
+    color:black;
+    border:1px solid #682d52;
+}
+.stRegisterForm i
+{
+    position:absolute;
+    padding:9px 8px;
+    font-size:20px;
+    color:grey;
+}
+.defines
+{
+    font-size:10px;
+}
+.imgdiv
+{
+    height:55px;
+    background:red;
+}
+
+.form-control:focus
+{
+    box-shadow:none;
+    border:1px solid #ced4da;
+}
+.glow:focus
+{
+    box-shadow:none;
+    border:2px solid #682d53;
+    box-shadow:0 0 5px #682d53;
+}
+</style>
+
+
+<div class="row mx-3 my-5">
+ <div class="col-sm-1"></div>
+    <div class="col-sm-10 stRegisterOuter">
+        <div class="row ">
+    <!-- ************** Student Registration Form Start ************** -->
+    <div class="col-sm-12 stRegisterForm py-4 px-4">
+        <h4 >Update<span style="border-bottom:2px solid #682d53;"> Your</span> Profile</h4>
+        <form method="post" class="pt-5" enctype="multipart/form-data">
+        {% csrf_token %} <!--cross site reforgery-->
+            <div class="row g-3">
+                <center>
+                <div class="col-sm-12 ">
+                   <img src="/{{request.session.pic}}" style="width:120px; height:120px;" class="mb-5">
+                </div>
+                </center>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa fa-user"></i>
+                    <input type="text" class="form-control glow" name="name" required value="{{request.session.name}}" >
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-id-badge"></i>
+                    <input type="text" class="form-control" name="rid" readonly value="{{request.session.regid}}">
+                  </div>
+
+                  <div class="col-sm-6 inputOuter">
+
+                    <select class="form-control glow" name="course">
+                        <option>{{request.session.course}}</option>
+                        <option>BCA</option>
+                        <option>Bcom</option>
+                        <option>Bsc</option>
+                    </select>
+                  </div>
+                <div class="col-sm-6 inputOuter">
+                    <select class="form-control glow" name="ryear">
+                        <option>{{request.session.year}}</option>
+                        <option>I</option>
+                        <option>II</option>
+                        <option>III</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-envelope"></i>
+                    <input type="email" class="form-control glow" name="email" required value="{{request.session.email}}">
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-phone"></i>
+                    <input type="tel" class="form-control glow" name="contact" required value="{{request.session.contact}}">
+                  </div>
+
+
+                  <div class="col-sm-6 inputOuter">
+                    <input type="file" class="form-control glow py-2 ps-3" name="pic" accept="image/*">
+                      <span class="defines">Update Your picture</span>
+                  </div>
+
+                  <div class="col-sm-6 inputOuter">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" class="form-control glow" required name="address" value="{{request.session.address}}">
+                  </div>
+
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 pt-3">
+                    <input type="submit" class="form-control"  value="Update">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </form>
+    </div>
+            <!-- ************** Student Registration Form End ************** -->
+        </div></div>
+     <div class="col-sm-1"></div>
+</div>
+
+
+{% endblock %}

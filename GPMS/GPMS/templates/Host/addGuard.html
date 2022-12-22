@@ -1,0 +1,147 @@
+{% extends 'AdminMaster.html' %}
+{% load static %}
+
+{% block title %}
+Add Guard
+{% endblock %}
+
+<!-- ************** Add Guard Form Start ************** -->
+{% block DashContent %}
+{% if request.session.adminId is None%}
+<script>
+alert('You have to login first')
+window.location.href="/host/studentLogin"
+</script>
+{% endif %}
+<style>
+.addGuardOuter
+{
+    min-height:80vh;
+    background:white;
+    box-shadow:-5px 5px 15px 3px grey;
+}
+.dashContent
+{
+    display:flex;
+    justify-content:center;
+    padding-top:110px;
+    padding-bottom:110px;
+}
+.addGuardOuter .guardpic
+{
+    height:100%;
+    width:100%;
+}
+.addGuardOuter  h4
+{
+text-align:center;
+}
+.AddGuardForm
+{
+
+}
+.AddGuardForm input
+{
+    padding-left:40px;
+}
+.AddGuardForm input[Type=submit]
+{
+    background:#642b4f;
+    color:white;
+    padding:5px 0px 5px 0px;
+    font-weight:bold;
+}
+.AddGuardForm input[Type=submit]:hover
+{
+    background:#ffe417;
+    color:black;
+    border:1px solid #682d52;
+}
+.AddGuardForm i
+{
+    position:absolute;
+    padding:9px 8px;
+    font-size:20px;
+    color:grey;
+}
+.defines
+{
+    font-size:10px;
+}
+.imgdiv
+{
+    height:55px;
+    background:red;
+}
+
+.form-control:focus
+{
+    box-shadow:none;
+    border:2px solid #682d53;
+    box-shadow:0 0 5px #682d53;
+}
+</style>
+<div class="row my-5 mx-5">
+
+    <div class="col-sm-12 addGuardOuter">
+        <div class="row ">
+    <div class="col-sm-4 pt-2 GuardPic">
+        <img src="{% static 'images/guard.png' %}" class="guardpic">
+    </div>
+    <!-- ************** Add Guard Form Start ************** -->
+    <div class="col-sm-8 AddGuardForm py-4 px-4">
+        <h4 >Ad<span style="border-bottom:2px solid #682d53;">d Gua</span>rd</h4>
+        <form method="post" class="pt-5" enctype="multipart/form-data">
+        {% csrf_token %} <!--cross site reforgery-->
+            <div class="row g-3">
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa fa-user"></i>
+                    <input type="text" class="form-control" name="name" required placeholder="Enter Guard Name *" >
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-id-badge"></i>
+                    <input type="text" class="form-control" name="gid" required placeholder="Enter GuardID *">
+                      <span class="defines">UserID can contain any letter or numbers, without spaces</span>
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-key"></i>
+                    <input type="password" class="form-control" name="passwd" required placeholder="Create Password *" >
+                      <span class="defines">Password should be atleast 8 characters</span>
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-key"></i>
+                    <input type="password" class="form-control" name="cpasswd" required placeholder="Confirm Password *">
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-envelope"></i>
+                    <input type="email" class="form-control" name="email" required placeholder="Enter Guard Email *">
+                  </div>
+                  <div class="col-sm-6 inputOuter">
+                      <i class="fa-solid fa-phone"></i>
+                    <input type="tel" class="form-control" name="mobile" required placeholder="Enter Guard Contact *">
+                  </div>
+
+
+                  <div class="col-sm-6 inputOuter">
+                    <input type="file" class="form-control py-2 ps-3" name="pic" accept="image/*">
+                      <span class="defines">Upload guard picture</span>
+                  </div>
+
+                  <div class="col-sm-6 inputOuter">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" class="form-control" required name="address" placeholder="Enter Guard Address *">
+                  </div>
+
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 pt-3">
+                    <input type="submit" class="form-control" value="ADD">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </form>
+    </div>
+        </div></div>
+
+</div>
+{% endblock %}
+<!-- ************** Add Guard Form End ************** -->

@@ -1,0 +1,136 @@
+{% extends 'AdminMaster.html' %}
+{% load static %}
+
+{% block title %}
+View_Details
+{% endblock %}
+
+{% block DashContent %}
+{% if request.session.adminId is None%}
+<script>
+alert('You have to login first')
+window.location.href="/host/studentLogin"
+</script>
+{% endif %}
+<style>
+*
+    {
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+.addGuardOuter
+{
+    min-height:105vh;
+    background:white;
+    box-shadow:-5px 5px 15px 3px grey;
+
+}
+.userdetails
+{
+    border-right:2px solid #dee2e6;
+}
+.details
+{
+    background:#eeeeee;
+    height:30px;
+    border:1px solid black;
+}
+.udetails span
+{
+    font-size:18px;
+    padding-left:0;
+}
+.reqdetails span
+{
+    font-size:18px;
+    padding-left:0;
+}
+.button
+{
+    width:150px;
+}
+@media (max-width: 575px)
+{
+    .userdetails
+    {
+        border-right:none;
+        border-bottom:2px solid #dee2e6;
+    }
+    .requestdetails
+    {
+        margin-top:30px;
+    }
+}
+@media (max-width: 992px)
+{
+    .button
+    {
+        width:100px;
+    }
+}
+</style>
+<div class="container-fluid">
+    {% if data %}
+    {% for x in data %}
+<div class="row mx-3 my-5 pt-4 addGuardOuter">
+
+    <div class="col-sm-6 userdetails ">
+        <h4 style="text-align:center;">User <span style="border-bottom:2px solid #682d53;"> Details</span></h4>
+
+        <div class="row pt-5 px-4 udetails">
+            <div class="col-sm-12 ">
+            <img src="/{{x.3}}" style="width:120px; height:120px;" class="mb-5">
+            </div>
+        <span>Name:</span>
+        <div class="col-sm-12 details mb-3">{{x.2}}</div>
+        <span>Registration Id:</span>
+        <div class="col-sm-12 details mb-3">{{x.1}}</div>
+        <span>Course:</span>
+        <div class="col-sm-12 details mb-3">{{x.4}}</div>
+            <span>Year:</span>
+        <div class="col-sm-12 details mb-3">{{x.5}}</div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 requestdetails">
+        <h4 style="text-align:center;">Request <span style="border-bottom:2px solid #682d53;"> Details</span></h4>
+
+        <div class="row pt-5 px-4 reqdetails">
+
+            <span>Request On:</span>
+            <div class="col-sm-12 details mb-3">{{x.10}}</div>
+
+            <span>From:</span>
+            <div class="col-sm-12 details mb-3">{{x.6}} / {{x.7}}</div>
+                <span>To:</span>
+            <div class="col-sm-12 details mb-3">{{x.8}} / {{x.9}}</div>
+            <span>Reason:</span>
+            <div class="col-sm-12 details mb-3" style="height:80px;">{{x.11}}</div>
+
+            <form method="post">
+                {% csrf_token %} <!--cross site reforgery-->
+                <div class="row">
+                    <div class="col-sm-12 inputOuter px-0">
+                        <span>Remark:</span>
+                         <textarea class="form-control remark" style="resize:none; background:#eeeeee; border:1px solid black;" name="Remark" rows="2"></textarea>
+                    </div>
+                    <div class="col-sm-5 px-0 py-4" style="text-align:center;">
+                   <input type="submit" class="btn btn-success form-control button" name="btn" value="Allow"/>
+                    </div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5 px-0 py-4" style="text-align:center;">
+                   <input type="submit" class="btn btn-danger form-control button" name="btn" value="Deny">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
